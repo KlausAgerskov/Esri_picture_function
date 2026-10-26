@@ -1,56 +1,42 @@
-# C++ objects and libs
-*.slo
-*.lo
-*.o
-*.a
-*.la
-*.lai
-*.so
-*.so.*
-*.dll
-*.dylib
+# --- Python ------------------------------------------------------------
+# The plugin repository rejects packages that contain these
+__pycache__/
+*.py[cod]
 
-# Qt-es
-object_script.*.Release
-object_script.*.Debug
-*_plugin_import.cpp
-/.qmake.cache
-/.qmake.stash
-*.pro.user
-*.pro.user.*
-*.qbs.user
-*.qbs.user.*
-*.moc
-moc_*.cpp
-moc_*.h
-qrc_*.cpp
-ui_*.h
-*.qmlc
-*.jsc
-Makefile*
-*build-*
+# Virtual environments, if you make one for linting or tests
+.venv/
+venv/
+
+# Linters and test runners
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Packaging ---------------------------------------------------------
+# Release zips are built from the repository, not stored in it
+*.zip
+dist/
 build/
-*.qm
-*.prl
-*.qmlls.ini
 
-# Qt unit tests
-target_wrapper.*
+# --- VS Code -----------------------------------------------------------
+# Personal editor settings. Remove the next lines (or use the !-lines
+# instead) if the team should share settings or debug configurations.
+.vscode/
+# !.vscode/settings.json
+# !.vscode/launch.json
+*.code-workspace
 
-# QtCreator
-*.autosave
+# --- Test material -----------------------------------------------------
+# QGIS projects and exported layout pictures used while testing. They may
+# hold service URLs, authcfg ids and pictures that should not be public.
+*.qgs~
+*.qgz~
+test_projects/
+layout_pictures/
 
-# QtCreator Qml
-*.qmlproject.user
-*.qmlproject.user.*
-
-# QtCreator CMake
-CMakeLists.txt.user*
-
-# QtCreator 4.8< compilation database
-compile_commands.json
-
-# QtCreator local machine specific files for imported projects
-*creator.user*
-
-*_qmlcache.qrc
+# --- Operating system --------------------------------------------------
+Thumbs.db
+desktop.ini
+.DS_Store

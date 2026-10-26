@@ -1,0 +1,39 @@
+[general]
+name=Esri Picture Function
+qgisMinimumVersion=3.40
+qgisMaximumVersion=4.99
+supportsQt6=True
+description=Shows pictures attached to ArcGIS Feature Service layers and makes them available to print layouts and atlas.
+about=Fetches the attachments of an ArcGIS Feature Service layer through the QGIS authentication manager, so services secured with OAuth2 on an ArcGIS Enterprise portal work without handling tokens by hand. Attachments on the layer itself and on related tables are found automatically.
+
+    The pictures of the selected features are shown in a panel. Large selections are fetched in batches, the features are marked on the map, and clicking a picture points out the feature it belongs to.
+
+    For print layouts the pictures are exported to a folder, rotated by their EXIF tag and capped in size, and inserted with the expression functions esri_picture() and esri_pictures() — in a picture item, or in an HTML item that lists every picture of the atlas feature.
+
+    No additional Python packages are required.
+version=1.1.0
+author=Klaus Agerskov
+email=klaua@nst.dk
+homepage=https://github.com/KlausAgerskov/esri-picture-function/wiki
+repository=https://github.com/KlausAgerskov/esri-picture-function
+tracker=https://github.com/KlausAgerskov/esri-picture-function/issues
+
+changelog=
+    1.1.0
+    - QGIS 4 (Qt6) support; QGIS 3.40 is now the minimum
+    - Keep pictures in the panel when the selection changes (on by default)
+    - Large selections are fetched in batches of 25, with a warning before very large fetches
+    - Features with fetched pictures are marked on the map
+    - Clicking a picture flashes its feature; right-click to zoom to, select or open its form
+    - Pictures on related tables are listed under the object id of the feature on the map
+    - Export for layout moved into the panel and exports the features held there
+    - Single-column HTML template that follows the frame width
+    1.0.0
+    - First release
+
+tags=arcgis,esri,feature service,arcgis enterprise,attachments,photos,pictures,layout,atlas,oauth2
+icon=icon.svg
+experimental=False
+deprecated=False
+hasProcessingProvider=no
+server=False

@@ -1,0 +1,65 @@
+<!--
+  Esri Picture Function: pictures for the atlas feature, one column, as wide
+  as the HTML frame.
+
+  In the layout's HTML item: paste this as the source, tick "Evaluate QGIS
+  expressions in HTML source", and for several pages set Frames > Resize mode
+  to "Extend to next page" with "Use smart page breaks".
+
+  Page breaks: the item renders one long page and cuts it into frames.
+  page-break-inside has no effect there. Smart page breaks instead look
+  upwards from the frame edge, at most "Maximum distance", for the row of
+  pixels with the fewest colour changes, and cut there. Two things make that
+  row the gap between two pictures:
+
+  * "Maximum distance" (under Use smart page breaks) must be at least the
+    tallest picture plus its margin — with max-height 170mm, set 180 mm.
+    The default 10 mm can only reach a gap when the cut happens to land
+    within 10 mm of one, so most pictures get sliced.
+  * The near-white border. A row of plain sky is as uniform as the white gap,
+    and lies closer to the edge, so without the border a picture could be
+    cut through the sky. The border adds colour changes to every row of the
+    picture. It is all but invisible; use a grey such as #999 for a visible
+    frame.
+
+  How the size works: the item renders the page at the frame's width
+  (1 mm = 3.78 px), so 100% is the frame width. No width is set on the
+  picture — max-width and max-height then scale it down proportionally until
+  it fits both. A landscape picture fills the width; a portrait picture stops
+  at max-height instead of running off the page.
+
+  Change max-height to suit the page: a little less than the frame height,
+  so a picture never has to be split across pages. Pictures narrower than the
+  frame are not enlarged; the export writes 1600 px on the long edge, which
+  is wider than most frames.
+
+  OBJECTID is the object id field of the coverage layer — change it if yours
+  is named differently.
+-->
+<style>
+  html, body { margin: 0; padding: 0; }
+
+  .picture {
+    margin: 0;
+    padding: 0 0 4mm 0;   /* the gap the page break is put in */
+    text-align: center;
+  }
+
+  .picture img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 170mm;
+    border: 1px solid #fafafa;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+</style>
+
+[% array_to_string(
+     array_foreach(
+       esri_pictures(attribute(@atlas_feature, 'OBJECTID')),
+       '<div class="picture"><img src="file:///' || @element || '"></div>'
+     ),
+     ''
+   ) %]
