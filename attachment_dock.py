@@ -188,7 +188,14 @@ def cache_size(cache_dir):
 
 
 def cache_path(cache_dir, url, name):
-    digest = hashlib.sha1(url.encode("utf-8")).hexdigest()[:12]
+    """Cache file for an attachment URL.
+
+    The hash only makes a short, stable file name; it protects nothing.
+    usedforsecurity=False says so, and keeps the names — and so the existing
+    cache — unchanged.
+    """
+    digest = hashlib.sha1(
+        url.encode("utf-8"), usedforsecurity=False).hexdigest()[:12]
     safe = re.sub(r"[^\w.\-]", "_", name or "attachment")
     return os.path.join(cache_dir, "{}_{}".format(digest, safe))
 
@@ -208,8 +215,11 @@ def parse_afs_source(layer):
         url = uri.param("url")
         if url:
             return url, (uri.authConfigId() or None)
-    except Exception:  # noqa: BLE001 — unexpected source syntax
-        pass
+    except Exception as exc:  # noqa: BLE001 — unexpected source syntax
+        # Not fatal: the regular expressions below read the source instead.
+        QgsMessageLog.logMessage(
+            "Could not parse the layer source, trying a simpler parse: "
+            "{}".format(exc), LOG_TAG, Qgis.MessageLevel.Info)
 
     m_url = re.search(r"url='([^']+)'", source)
     m_auth = re.search(r"authcfg=([A-Za-z0-9_]+)", source)

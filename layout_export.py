@@ -140,10 +140,9 @@ def register_functions():
 def unregister_functions():
     """Called from the plugin's unload(). Without it the next reload fails."""
     for name in ("esri_picture", "esri_pictures"):
-        try:
-            QgsExpression.unregisterFunction(name)
-        except Exception:  # noqa: BLE001 — was not registered
-            pass
+        # Returns False rather than raising when the function is not
+        # registered, so no exception handling is needed.
+        QgsExpression.unregisterFunction(name)
 
 
 # --------------------------------------------------------------------------
