@@ -14,9 +14,9 @@ about=Fetches the attachments of an ArcGIS Feature Service layer through the QGI
 version=1.1.0
 author=Klaus Agerskov
 email=klaua@nst.dk
-homepage=https://github.com/KlausAgerskov/esri-picture-function/wiki
-repository=https://github.com/KlausAgerskov/esri-picture-function
-tracker=https://github.com/KlausAgerskov/esri-picture-function/issues
+homepage=https://github.com/KlausAgerskov/Esri_picture_function/wiki
+repository=https://github.com/KlausAgerskov/Esri_picture_function
+tracker=https://github.com/KlausAgerskov/Esri_picture_function/issues
 
 changelog=
     1.1.0
